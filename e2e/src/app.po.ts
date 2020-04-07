@@ -6,6 +6,10 @@ export class AppPage {
   }
 
   getParagraphText() {
-    return element(by.deepCss('app-root ion-content')).getText();
+    return element(by.deepCss('app-root ion-content ion-card-title')).getText();
+  }
+
+  getList() {
+    return element(by.deepCss('app-root ion-content ion-list')).isDisplayed();
   }
 }

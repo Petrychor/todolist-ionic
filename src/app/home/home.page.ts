@@ -11,7 +11,7 @@ import { EditModalPage } from '../edit-modal/edit-modal.page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  @ViewChild(IonReorderGroup, {static: false}) reorderGroup: IonReorderGroup;
+  @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
   @Input() todo: Todo;
   form: FormGroup;
   

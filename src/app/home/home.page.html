@@ -10,7 +10,7 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-col size-md="6" offset-md="3">
+      <ion-col size-lg="6" offset-lg="3">
         <form [formGroup]="form">
           <ion-card>
             <ion-card-header>
@@ -90,7 +90,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col size-md="6" offset-md="3">
+      <ion-col size-lg="6" offset-lg="3">
           <ion-list>
             <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
             <ion-item *ngFor="let todo of getTodos()" ngClass={{todo.priority}} [disabled]="todo.isDone">

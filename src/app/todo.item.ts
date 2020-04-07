@@ -9,8 +9,4 @@ export class Todo {
               public isDone: boolean = false,) {
   }
 
-  setTitle(title: string){
-      this.title = title;
-  }
-
 }

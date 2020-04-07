@@ -13,7 +13,7 @@ import { EditModalPage } from './edit-modal/edit-modal.page';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, EditModalPage],
+  declarations: [AppComponent],
   entryComponents: [EditModalPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), FormsModule],
   providers: [
