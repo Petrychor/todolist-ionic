@@ -26,6 +26,53 @@
   text-decoration: none;
 }
 
+h3 {
+  min-height: 22px;
+}
+
 ion-content ion-toolbar {
   --background: translucent;
+}
+
+ion-item h2 {
+  font-weight: 600;
+  margin: 0;
+}
+
+ion-item p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 95%;
+}
+
+ion-item .date {
+  float: right;
+  align-items: center;
+  display: flex;
+}
+
+ion-item{
+  --ion-background-color:#fff;
+}
+
+.low {
+  color: rgb(3, 36, 3);
+}
+
+.normal  {
+  color: rgb(134, 160, 41);
+}
+
+.high {
+  color: rgb(70, 6, 6);
+}
+
+.labels {
+  width: 100%;
+}
+
+.buttons {
+  max-width: 30%;
+  text-align: right;
 }

@@ -1,20 +1,124 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Blank
+      TODO LIST
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <form [formGroup]="form">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Add a todo</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="fixed">What to do: </ion-label>
+                    <ion-input 
+                      type="text"
+                      formControlName="title"></ion-input>
+                  </ion-item>
+                  <ion-item  *ngIf="!form.get('title').valid && form.get('title').touched" lines="none">
+                    <ion-label color="danger">Should be at least 3 characters long!</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-label position="fixed">When to do: </ion-label>
+                    <ion-datetime 
+                      displayFormat="YYYY-MMM-DD" 
+                      min="2020-04-01" 
+                      max="2029-12-31"
+                      monthShortNames="jan, feb, mar, apr, may, jun, jul, aug, sep, okt, nov, dec"
+                      formControlName="dueDate"></ion-datetime>
+                  </ion-item>                
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-radio-group formControlName="priority">
+                    <ion-row>
+                      <ion-col size-xs="12" size-sm="4">  
+                        <ion-item>
+                          <ion-label class="low">Low</ion-label>
+                          <ion-radio slot="start" value="low"></ion-radio>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="4">
+                        <ion-item>
+                          <ion-label class="normal">Normal</ion-label>
+                          <ion-radio slot="start" value="normal"></ion-radio>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="4">
+                        <ion-item>
+                          <ion-label class="high">High</ion-label>
+                          <ion-radio slot="start" value="high"></ion-radio>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-radio-group>               
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Description:</ion-label>
+                    <ion-textarea 
+                      placeholder="If todo needs further information to hold, you know what to do..." 
+                      rows="2" 
+                      formControlName="description"></ion-textarea>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <div class="ion-margin-vertical ion-text-right">
+                <ion-button 
+                  color="secondary"
+                  (click)="onSubmit()" [disabled]="!form.valid"
+                  ><ion-icon slot="start" name="add-outline"></ion-icon>Add todo</ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+          <ion-list>
+            <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+            <ion-item *ngFor="let todo of getTodos()" ngClass={{todo.priority}} [disabled]="todo.isDone">
+                <ion-reorder slot="start"></ion-reorder>
+                <ion-label class="ion-text-wrap ion-padding-end ion-float-left">
+                  <h2>
+                    {{ todo.title }}
+                    <span class="date">
+                      <ion-note>{{ todo.dueDate |date}}</ion-note>
+                    </span>
+                  </h2>
+                  <h3>{{ todo.description }}</h3>
+                </ion-label>
+                <div class="buttons">
+                  <ion-button (click)="todoRemove(todo.id)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="openModal(todo.id)" color="secondary" [disabled]="todo.isDone">
+                    <ion-icon slot="icon-only" name="pencil" aria-label="Edit item"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="todoDone(todo.id)" color="tertiary" [disabled]="todo.isDone">
+                    <ion-icon slot="icon-only" name="checkmark-done-outline" aria-label="Complete item"></ion-icon>
+                  </ion-button>
+                </div>
+            </ion-item>
+          </ion-reorder-group>
+          </ion-list>  
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

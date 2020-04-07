@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Edit todo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()"><ion-icon slot="icon-only" name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <ion-item>
+            <ion-label position="fixed">What to do: </ion-label>
+            <ion-input 
+              type="text"
+              [(ngModel)]="editableData.title"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="10" offset="1">
+          <ion-item>
+            <ion-label position="fixed">When to do: </ion-label>
+            <ion-datetime 
+              displayFormat="YYYY-MMM-DD" 
+              min="2020-04-01" 
+              max="2029-12-31"
+              monthShortNames="jan, feb, mar, apr, may, jun, jul, aug, sep, okt, nov, dec"
+              [(ngModel)]="editableData.dueDate"></ion-datetime>
+          </ion-item>                
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <ion-radio-group [(ngModel)]="editableData.priority">
+            <ion-row>
+              <ion-col size-xs="12" size-sm="4">  
+                <ion-item>
+                  <ion-label class="low">Low</ion-label>
+                  <ion-radio slot="start" value="low"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col size-xs="12" size-sm="4">
+                <ion-item>
+                  <ion-label class="normal">Normal</ion-label>
+                  <ion-radio slot="start" value="normal"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col size-xs="12" size-sm="4">
+                <ion-item>
+                  <ion-label class="high">High</ion-label>
+                  <ion-radio slot="start" value="high"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>               
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <ion-item>
+            <ion-label>Description:</ion-label>
+            <ion-textarea 
+              placeholder="If todo needs further information to hold, you know what to do..." 
+              rows="2" 
+              [(ngModel)]="editableData.description"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <div class="ion-margin-vertical ion-text-right">
+            <ion-button 
+              color="secondary"
+              (click)="saveEdit()"
+              ><ion-icon slot="start" name="save-outline"></ion-icon>Save todo</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+</ion-content>
